@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MSAR ALHLWL – Information Technology EST</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-dark: #0a1f44;
+      --blue-mid:  #1452a8;
+      --blue-sky:  #2196f3;
+      --blue-light:#e8f4fd;
+      --accent:    #00c6ff;
+      --white:     #ffffff;
+      --grey:      #f4f7fb;
+      --text:      #1a2a40;
+      --muted:     #6b80a0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--grey);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 60%, var(--blue-sky) 100%);
+      color: var(--white);
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 56px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .logo-wrap {
+      flex-shrink: 0;
+      width: 110px;
+      height: 110px;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.25);
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+    .logo-wrap img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
+    /* Fallback circuit logo if image doesn't load */
+    .logo-svg { display: none; }
+    .logo-wrap img[src="logo.PNG"] { display: block; }
+
+    .header-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+    .header-text .tagline {
+      margin-top: 6px;
+      font-size: 1rem;
+      opacity: 0.75;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+    .header-text .arabic {
+      margin-top: 4px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      direction: rtl;
+    }
+    .badge-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 40px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── NAV STRIP ───────────────────────────────────────── */
+    nav {
+      background: var(--white);
+      border-bottom: 2px solid var(--blue-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    nav ul {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      gap: 4px;
+      list-style: none;
+    }
+    nav ul li a {
+      display: block;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav ul li a:hover { color: var(--blue-mid); border-color: var(--blue-mid); }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 32px 60px;
+    }
+
+    /* ── SECTION TITLE ───────────────────────────────────── */
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-sky), transparent);
+      border-radius: 2px;
+    }
+
+    /* ── CARDS ───────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 16px rgba(20,82,168,0.07);
+      margin-bottom: 28px;
+      border: 1px solid rgba(33,150,243,0.1);
+    }
+
+    /* ── INFO GRID ───────────────────────────────────────── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .info-item {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 22px;
+      border-left: 4px solid var(--blue-sky);
+      box-shadow: 0 2px 10px rgba(20,82,168,0.06);
+    }
+    .info-item .label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .info-item .value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .info-item.highlight { border-left-color: var(--accent); }
+    .info-item.highlight .value { color: var(--blue-mid); font-weight: 600; }
+
+    /* ── SERVICES ─────────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 22px 20px;
+      text-align: center;
+      border: 1px solid var(--blue-light);
+      box-shadow: 0 2px 12px rgba(20,82,168,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(20,82,168,0.13);
+    }
+    .service-card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 6px;
+    }
+    .service-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── TEAM / LICENSE ───────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+    .person-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 22px 24px;
+      border: 1px solid var(--blue-light);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-sky));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .person-card .role {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--blue-sky);
+      margin-bottom: 3px;
+    }
+    .person-card .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .person-card .nationality {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* ── STATUS PILL ─────────────────────────────────────── */
+    .pill {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .pill.active { background: #e6f9f0; color: #1a9960; }
+    .pill.expiry { background: #fff3e0; color: #e67e00; }
+
+    /* ── CONTACT ─────────────────────────────────────────── */
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue-light);
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--blue-dark);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-chip:hover { background: #cce4f8; }
+    .contact-chip .icon { font-size: 1.1rem; }
+
+    /* ── FINANCIAL HIGHLIGHTS ─────────────────────────────── */
+    .fin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .fin-grid { grid-template-columns: 1fr; } }
+    .fin-card {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+      border-radius: 14px;
+      padding: 24px 20px;
+      color: var(--white);
+      text-align: center;
+    }
+    .fin-card .year {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .fin-card .amount {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .fin-card .label {
+      font-size: 0.78rem;
+      opacity: 0.75;
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 24px 32px;
+      font-size: 0.82rem;
+    }
+    footer strong { color: white; }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card, .info-item, .service-card, .person-card, .fin-card {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; text-align: center; }
+      .badge-row { justify-content: center; }
+      nav ul { overflow-x: auto; }
+      main { padding: 24px 16px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <!-- Logo image – place logo.PNG in same folder as index.html -->
+      <img src="logo.PNG" alt="MSAR ALHLWL Logo"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"/>
+      <!-- Inline SVG fallback -->
+      <svg class="logo-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="64" height="64" rx="14" fill="url(#g1)"/>
+        <path d="M24 24 L24 52 L36 52" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <path d="M36 40 L52 40" stroke="white" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="52" cy="28" r="5" fill="white"/>
+        <circle cx="52" cy="40" r="5" fill="white"/>
+        <circle cx="52" cy="52" r="5" fill="white"/>
+        <defs>
+          <linearGradient id="g1" x1="8" y1="8" x2="72" y2="72" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#1452a8"/>
+            <stop offset="1" stop-color="#2196f3"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>MSAR ALHLWL<br/>Information Technology EST</h1>
+      <p class="arabic">مؤسسة مسار الحلول لتقنية المعلومات</p>
+      <p class="tagline">Path of Solutions · مسار الحلول</p>
+      <div class="badge-row">
+        <span class="badge">🇦🇪 Sharjah, UAE</span>
+        <span class="badge">License #1383526</span>
+        <span class="badge">☁️ Cloud &amp; DevOps</span>
+        <span class="badge">Est. 2024</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══ MAIN ═════════════════════════════════════════════════ -->
+<main>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">Company Overview</h2>
+    <div class="card">
+      <p style="line-height:1.8; font-size:0.95rem; color:var(--text); max-width:780px;">
+        <strong>MSAR ALHLWL Information Technology EST</strong> is a Sharjah-based IT establishment
+        specializing in <em>cloud infrastructure</em>, <em>DevOps services</em>, and
+        <em>digital transformation solutions</em> for the UAE SME market. Licensed by the Department of
+        Economic Development (Sharjah), we provide innovative IT solutions that guide businesses toward
+        digital excellence — your clear "Path of Solutions."
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:20px; margin-top:22px;">
+        <div>
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:4px;">Mission</div>
+          <div style="font-size:0.9rem; max-width:340px; line-height:1.6;">Develop and implement integrated IT solutions that meet client needs, enhance operational efficiency, and empower businesses with cutting-edge cloud and DevOps technology.</div>
+        </div>
+        <div>
+          <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:.8px; color:var(--muted); margin-bottom:4px;">Vision</div>
+          <div style="font-size:0.9rem; max-width:340px; line-height:1.6;">To be a recognized provider of innovative cloud and DevOps solutions in the UAE, guiding small and medium businesses on their journey toward digital excellence.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item highlight">
+        <div class="label">License Number</div>
+        <div class="value">1383526</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Legal Structure</div>
+        <div class="value">Sole Establishment</div>
+      </div>
+      <div class="info-item">
+        <div class="label">Issuing Authority</div>
+        <div class="value">Dept. of Economic Development, Sharjah</div>
+      </div>
+      <div class="info-item">
+        <div class="label">License Issue Date</div>
+        <div class="value">04 July 2024</div>
+      </div>
+      <div class="info-item">
+        <div class="label">License Expiry Date</div>
+        <div class="value"><span class="pill expiry">03 July 2026</span></div>
+      </div>
+      <div class="info-item">
+        <div class="label">Registered Activities</div>
+        <div class="value">
+          <span class="pill active">Web Design</span>&nbsp;
+          <span class="pill active">IT Network Services</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="label">Business Location</div>
+        <div class="value">Office 901, B49, Business Bay, Sharjah</div>
+      </div>
+      <div class="info-item">
+        <div class="label">P.O. Box</div>
+        <div class="value">22430</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" style="margin-top:20px;">
+    <h2 class="section-title">Core Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">☁️</div>
+        <h3>Cloud Infrastructure</h3>
+        <p>AWS, Azure &amp; GCP migration, architecture design, and cost optimisation</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">⚙️</div>
+        <h3>DevOps &amp; Automation</h3>
+        <p>CI/CD pipelines, Docker, Kubernetes, IaC with Terraform &amp; Ansible</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌐</div>
+        <h3>Web Design &amp; Dev</h3>
+        <p>Professional websites, e-commerce platforms &amp; custom web applications</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🔌</div>
+        <h3>IT Network Services</h3>
+        <p>Network design, VPN setup, firewall configuration &amp; monitoring</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🛡️</div>
+        <h3>Managed Services</h3>
+        <p>24/7 cloud monitoring, maintenance, backups &amp; IT helpdesk support</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📦</div>
+        <h3>Cloud Migration</h3>
+        <p>End-to-end migration from on-premise infrastructure to the cloud</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" style="margin-top:36px;">
+    <h2 class="section-title">Team &amp; Ownership</h2>
+    <div class="two-col">
+      <div class="person-card">
+        <div class="avatar">H</div>
+        <div>
+          <div class="role">Founder &amp; Managing Director · 100% Owner</div>
+          <div class="name">Hanan Ali Yousif Alzain</div>
+          <div class="nationality">🇸🇩 Sudanese National</div>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="avatar">H</div>
+        <div>
+          <div class="role">Services Agent (UAE National)</div>
+          <div class="name">Hayat Ismail Saleh Yousif Ahmed</div>
+          <div class="nationality">🇦🇪 UAE National</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LICENSE -->
+  <section id="license" style="margin-top:36px;">
+    <h2 class="section-title">License Details</h2>
+    <div class="card" style="padding:20px 28px;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+        <tbody>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted); width:220px;">Business Name (EN)</td>
+            <td style="padding:10px 0; font-weight:500;">MSAR ALHLWL INFORMATION TECHNOLOGY EST.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">Business Name (AR)</td>
+            <td style="padding:10px 0; font-weight:500; direction:rtl; text-align:right;">مؤسسة مسار الحلول لتقنية المعلومات</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">License No.</td>
+            <td style="padding:10px 0; font-weight:600; color:var(--blue-mid);">1383526</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">License Category</td>
+            <td style="padding:10px 0;">Dep. of Economic Development</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">Legal Type</td>
+            <td style="padding:10px 0;">Sole Establishment</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">Issue Date</td>
+            <td style="padding:10px 0;">04 / 07 / 2024</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">Expiry Date</td>
+            <td style="padding:10px 0;"><span class="pill expiry">03 / 07 / 2026</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--blue-light);">
+            <td style="padding:10px 0; color:var(--muted);">Parcel ID</td>
+            <td style="padding:10px 0;">346-475</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; color:var(--muted);">Renewal Receipt</td>
+            <td style="padding:10px 0;">AED 9,030 — Receipt No. 16853830 (20/10/2025)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FINANCIALS -->
+  <section id="financials" style="margin-top:36px;">
+    <h2 class="section-title">3-Year Financial Highlights</h2>
+    <div class="fin-grid">
+      <div class="fin-card" style="animation-delay:0s">
+        <div class="year">Year 1 — 2025</div>
+        <div class="amount">AED 533K</div>
+        <div class="label">Revenue · 42% Net Margin</div>
+      </div>
+      <div class="fin-card" style="animation-delay:0.1s; background:linear-gradient(135deg,#1452a8,#2196f3);">
+        <div class="year">Year 2 — 2026</div>
+        <div class="amount">AED 1.26M</div>
+        <div class="label">Revenue · 29.8% Net Margin</div>
+      </div>
+      <div class="fin-card" style="animation-delay:0.2s; background:linear-gradient(135deg,#2196f3,#00c6ff); color:var(--blue-dark);">
+        <div class="year">Year 3 — 2027</div>
+        <div class="amount">AED 2.45M</div>
+        <div class="label" style="opacity:0.7;">Revenue · 30% Net Margin</div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:0.8rem; color:var(--muted);">* Projections from Strategic Business Plan v2.0 (November 2025). Break-even achieved Month 1 under bootstrap model.</p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="margin-top:36px;">
+    <h2 class="section-title">Contact &amp; Location</h2>
+    <div class="card">
+      <div class="contact-row">
+        <a class="contact-chip" href="tel:+97150652184">
+          <span class="icon">📱</span> +971-50-6521841
+        </a>
+        <a class="contact-chip" href="tel:+97165652184">
+          <span class="icon">📞</span> +971-65-6521841
+        </a>
+        <a class="contact-chip" href="mailto:m0h2med.abdalla@gmail.com">
+          <span class="icon">✉️</span> m0h2med.abdalla@gmail.com
+        </a>
+        <div class="contact-chip">
+          <span class="icon">📍</span> Office 901, B49, Business Bay, Sharjah, UAE
+        </div>
+        <div class="contact-chip">
+          <span class="icon">📬</span> P.O. Box 22430
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <strong>MSAR ALHLWL Information Technology EST</strong> &nbsp;·&nbsp;
+  مؤسسة مسار الحلول لتقنية المعلومات &nbsp;·&nbsp;
+  License No. 1383526 &nbsp;·&nbsp; Sharjah, UAE &nbsp;·&nbsp;
+  © 2024 – 2026. All rights reserved.
+</footer>
+
+</body>
+</html>
